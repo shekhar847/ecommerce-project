@@ -55,7 +55,14 @@ npm run dev
 
 ## Project Screenshots
 
-(Add screenshots here)
+Home Page
+Products Page
+Product Details
+Cart
+Checkout
+Orders
+Admin Dashboard
+Analytics Dashboard
 
 ## Author
 
