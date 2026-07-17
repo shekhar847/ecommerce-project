@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URL } from "../config";
 import axios from "axios";
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +13,7 @@ function Checkout() {
   const [city, setCity] = useState("");
   const payNow = async () => {
     try {
-      const { data } = await axios.post("http://localhost:5000/api/payment/create-order", { amount: totalPrice, });
+      const { data } = await axios.post(`${API_URL}/api/payment/create-order`, { amount: totalPrice, });
       const options = {
         key: "rzp_test_SzqgmJdlfylllC",
         amount: data.amount,
@@ -22,7 +23,7 @@ function Checkout() {
         order_id: data.id,
         handler: async function () {
           try {
-            await axios.post("http://localhost:5000/api/orders",
+            await axios.post(`${API_URL}/api/orders`,
               {
                 user: name,
                 items: cart,

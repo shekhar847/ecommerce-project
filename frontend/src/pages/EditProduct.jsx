@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 import axios from "axios";
 
 function EditProduct() {
@@ -15,7 +16,7 @@ function EditProduct() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+        const { data } = await axios.get(`${API_URL}/api/products/${id}`);
         setName(data.name);
         setImage(data.image);
         setDescription(data.description);
@@ -30,7 +31,7 @@ function EditProduct() {
   }, [id]);
   const submitHandler = async (e) => {e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/products/${id}`,{name,image,description,category,price,countInStock,});
+      await axios.put(`${API_URL}/api/products/${id}`,{name,image,description,category,price,countInStock,});
       alert("Product Updated Successfully");
       navigate("/products");
     } catch (error) {

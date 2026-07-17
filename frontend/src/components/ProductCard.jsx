@@ -1,6 +1,7 @@
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { Link } from "react-router-dom";
+import { API_URL } from "../config";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -10,7 +11,7 @@ function ProductCard({ product }) {
 
   const deleteHandler = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/products/${product._id}`);
+      await axios.delete(`${API_URL}/api/products/${product._id}`);
       toast.success("Product Deleted Successfully");
       window.location.reload();
     } catch (error) {

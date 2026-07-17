@@ -2,6 +2,7 @@ import { useWishlist } from "../context/WishlistContext";
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import { API_URL } from "../config";
 import axios from "axios";
 import { useCart } from "../context/CartContext";
 import { toast } from "react-toastify";
@@ -18,8 +19,8 @@ function ProductDetails() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productRes = await axios.get(`http://localhost:5000/api/products/${id}`);
-        const productsRes = await axios.get("http://localhost:5000/api/products");
+        const productRes = await axios.get(`${API_URL}/api/products/${id}`);
+        const productsRes = await axios.get(`${API_URL}/api/products`);
         setProduct(productRes.data);
         setProducts(productsRes.data);
       } catch (error) {
@@ -39,7 +40,7 @@ function ProductDetails() {
         toast.warning("Please Enter Review");
         return;
       }
-      await axios.post(`http://localhost:5000/api/products/${id}/reviews`,
+      await axios.post(`${API_URL}/api/products/${id}/reviews`,
         {
           user: user.name,
           rating,

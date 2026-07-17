@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../config";
 import axios from "axios";
 
 function MyOrders() {
@@ -7,7 +8,7 @@ function MyOrders() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/orders");
+        const { data } = await axios.get(`${API_URL}/api/orders`);
         setOrders(data);
       } catch (error) {
         console.log(error);
@@ -41,7 +42,7 @@ function MyOrders() {
             </p>
             <select className="form-select mt-2" value={order.status} onChange={async (e) => {
                 try {
-                  await axios.put(`http://localhost:5000/api/orders/${order._id}/status`,{status: e.target.value,});
+                  await axios.put(`${API_URL}/api/orders/${order._id}/status`,{status: e.target.value,});
                   alert("Order Status Updated");
                   window.location.reload();
                 } catch (error) {

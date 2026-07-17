@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../config";
 import axios from "axios";
 
 import {BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,} from "recharts";
@@ -9,8 +10,8 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: productsData } = await axios.get("http://localhost:5000/api/products");
-        const { data: ordersData } = await axios.get("http://localhost:5000/api/orders");
+        const { data: productsData } = await axios.get(`${API_URL}/api/products`);
+        const { data: ordersData } = await axios.get(`${API_URL}/api/orders`);
         setProducts(productsData);
         setOrders(ordersData);
       } catch (error) {

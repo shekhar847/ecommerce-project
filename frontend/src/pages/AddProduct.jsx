@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URL } from "../config";
 import axios from "axios";
 
 function AddProduct() {
@@ -11,7 +12,7 @@ function AddProduct() {
 
   const submitHandler = async (e) => {e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/products",
+      const { data } = await axios.post(`${API_URL}/api/products`,
         {
           name,
           image,
