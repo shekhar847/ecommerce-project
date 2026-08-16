@@ -3,7 +3,7 @@
    Direction: Apple / Nike Luxury Light Aesthetics
    Signature: High-contrast Jet Black & Royal Blue on Crisp White
    ========================================================= */
-:root {
+:root, [data-theme="light"] {
   /* -- Palette -- */
   --void: #f8fafc;          /* Ultra clean light canvas */
   --void-2: #ffffff;        /* Elevated pure white container */
@@ -35,6 +35,76 @@
   --radius-pill: 999px;
 
   --prism-gradient: linear-gradient(135deg, #0f172a 0%, #2563eb 100%);
+}
+
+/* =========================== Dark Theme Overrides =========================== */
+[data-theme="dark"] {
+  --void: #090d16;
+  --void-2: #0f172a;
+  --surface: #111827;
+  --surface-2: #1f2937;
+  --edge: rgba(255, 255, 255, 0.1);
+  --edge-strong: rgba(255, 255, 255, 0.2);
+  --neon-cyan: #38bdf8;
+  --neon-violet: #818cf8;
+  --neon-lime: #10b981;
+  --neon-pink: #f43f5e;
+  --text-hi: #f8fafc;
+  --text-mid: #cbd5e1;
+  --text-lo: #94a3b8;
+  --danger: #ef4444;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --prism-gradient: linear-gradient(135deg, #4f46e5 0%, #3b82f6 50%, #38bdf8 100%);
+}
+
+[data-theme="dark"] body {
+  background:
+    radial-gradient(60vw 40vh at 15% 0%, rgba(79, 70, 229, 0.15), transparent 60%),
+    radial-gradient(50vw 40vh at 85% 15%, rgba(56, 189, 248, 0.1), transparent 60%),
+    #090d16;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .glass-card,
+[data-theme="dark"] .prism-edge,
+[data-theme="dark"] .product-card,
+[data-theme="dark"] .product-details-card,
+[data-theme="dark"] .card {
+  background: #111827 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .navbar .container {
+  background: rgba(17, 24, 39, 0.85) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .navbar-brand {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6,
+[data-theme="dark"] .text-dark {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+  background: #1e293b !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] footer {
+  background: #0f172a !important;
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* =========================== Base =========================== */

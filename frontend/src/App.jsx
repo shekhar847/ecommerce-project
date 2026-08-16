@@ -1,5 +1,6 @@
 import { CartProvider } from "./context/CartContext";
 import { WishlistProvider } from "./context/WishlistContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Checkout from "./pages/Checkout";
@@ -21,31 +22,33 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <WishlistProvider>
-      <CartProvider>
-        <BrowserRouter>
-          <Navbar />
+    <ThemeProvider>
+      <WishlistProvider>
+        <CartProvider>
+          <BrowserRouter>
+            <Navbar />
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/product/:id" element={<ProductDetails />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/orders" element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
-            <Route path="/add-product" element={<ProtectedRoute><AddProduct /></ProtectedRoute>} />
-            <Route path="/edit-product/:id" element={<EditProduct />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-          </Routes>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/orders" element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
+              <Route path="/add-product" element={<ProtectedRoute><AddProduct /></ProtectedRoute>} />
+              <Route path="/edit-product/:id" element={<EditProduct />} />
+              <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+            </Routes>
 
-          <Footer />
-        </BrowserRouter>
-      </CartProvider>
-    </WishlistProvider>
+            <Footer />
+          </BrowserRouter>
+        </CartProvider>
+      </WishlistProvider>
+    </ThemeProvider>
   );
 }
 

@@ -1,10 +1,12 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
-import { ShoppingBagIcon, HeartIcon, UserIcon, LogOutIcon, SparklesIcon, PlusIcon } from "./Icons";
+import { useTheme } from "../context/ThemeContext";
+import { ShoppingBagIcon, HeartIcon, UserIcon, LogOutIcon, SparklesIcon, PlusIcon, SunIcon, MoonIcon } from "./Icons";
 
 function Navbar() {
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
   const user = (() => {
     try {
       return JSON.parse(localStorage.getItem("user"));
@@ -27,20 +29,13 @@ function Navbar() {
   return (
     <header className="sticky-top py-3" style={{ zIndex: 1050 }}>
       <div className="container">
-        <nav className="navbar navbar-expand-lg px-3 py-2" style={{
-          background: "rgba(255, 255, 255, 0.92)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          border: "1px solid #e2e8f0",
-          borderRadius: "var(--radius-pill)",
-          boxShadow: "0 10px 30px rgba(15, 23, 42, 0.06)"
-        }}>
+        <nav className="navbar navbar-expand-lg px-3 py-2">
           {/* Brand Logo */}
           <Link className="navbar-brand d-flex align-items-center gap-2 fw-bold me-4" to="/">
             <div className="rounded-circle d-flex align-items-center justify-content-center" style={{
               width: "36px",
               height: "36px",
-              background: "#0f172a"
+              background: "var(--prism-gradient)"
             }}>
               <SparklesIcon size={20} className="text-white" />
             </div>
@@ -48,8 +43,7 @@ function Navbar() {
               fontFamily: "var(--font-display)",
               fontSize: "1.35rem",
               fontWeight: "800",
-              letterSpacing: "-0.02em",
-              color: "#0f172a"
+              letterSpacing: "-0.02em"
             }}>
               ShopSphere
             </span>
@@ -77,7 +71,7 @@ function Navbar() {
                   to="/products"
                   className={({ isActive }) =>
                     `nav-link px-3 py-2 rounded-pill fw-medium transition-all ${
-                      isActive ? "bg-dark text-white fw-bold shadow-sm" : "text-dark"
+                      isActive ? "bg-primary text-white fw-bold shadow-sm" : "text-dark"
                     }`
                   }
                 >
@@ -92,7 +86,7 @@ function Navbar() {
                       to="/add-product"
                       className={({ isActive }) =>
                         `nav-link px-3 py-2 rounded-pill d-flex align-items-center gap-1 ${
-                          isActive ? "bg-dark text-white fw-bold shadow-sm" : "text-dark"
+                          isActive ? "bg-primary text-white fw-bold shadow-sm" : "text-dark"
                         }`
                       }
                     >
@@ -104,7 +98,7 @@ function Navbar() {
                       to="/admin"
                       className={({ isActive }) =>
                         `nav-link px-3 py-2 rounded-pill ${
-                          isActive ? "bg-dark text-white fw-bold shadow-sm" : "text-dark"
+                          isActive ? "bg-primary text-white fw-bold shadow-sm" : "text-dark"
                         }`
                       }
                     >
@@ -115,8 +109,18 @@ function Navbar() {
               )}
             </ul>
 
-            {/* Right icons & User profile */}
+            {/* Right icons, Theme Toggle & User profile */}
             <div className="d-flex align-items-center flex-wrap gap-2 mt-2 mt-lg-0">
+              {/* Theme Switcher Toggle Button */}
+              <button
+                className="btn btn-outline-light rounded-pill d-flex align-items-center justify-content-center p-2"
+                style={{ width: "42px", height: "42px" }}
+                onClick={toggleTheme}
+                title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              >
+                {theme === "dark" ? <SunIcon size={18} className="text-warning" /> : <MoonIcon size={18} className="text-dark" />}
+              </button>
+
               {/* Wishlist button */}
               <Link
                 to="/wishlist"
