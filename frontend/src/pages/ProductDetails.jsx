@@ -13,6 +13,7 @@ function ProductDetails() {
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [products, setProducts] = useState([]);
+  const [activeImage, setActiveImage] = useState("");
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
@@ -89,14 +90,29 @@ function ProductDetails() {
 
       {/* Main Product Info Grid */}
       <div className="row g-4 mb-5">
-        {/* Product Image */}
+        {/* Product Image & Thumbnail Gallery */}
         <div className="col-lg-5">
-          <div className="glass-card p-3 prism-edge h-100 d-flex align-items-center justify-content-center">
+          <div className="glass-card p-3 prism-edge h-100 d-flex flex-column align-items-center justify-content-center">
             <img
-              src={product.image}
+              src={activeImage || product.image}
               alt={product.name}
-              className="img-fluid rounded-4 product-details-img shadow-lg"
+              className="img-fluid rounded-4 product-details-img shadow-lg mb-3"
             />
+            {/* Multi-Image Thumbnails */}
+            <div className="d-flex gap-2 justify-content-center w-100 mt-auto">
+              {[product.image, product.image, product.image].map((imgUrl, idx) => (
+                <button
+                  key={idx}
+                  className={`btn p-1 rounded-3 border transition-all ${
+                    (activeImage || product.image) === imgUrl ? "border-primary shadow-sm" : "border-light opacity-75"
+                  }`}
+                  style={{ width: "64px", height: "64px", overflow: "hidden" }}
+                  onClick={() => setActiveImage(imgUrl)}
+                >
+                  <img src={imgUrl} alt="Thumbnail" className="w-100 h-100 object-fit-cover rounded-2" />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 

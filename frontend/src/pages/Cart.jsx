@@ -1,10 +1,31 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import { TrashIcon, ShoppingBagIcon, ArrowRightIcon, PlusIcon } from "../components/Icons";
+import { TrashIcon, ShoppingBagIcon, ArrowRightIcon, PlusIcon, SparklesIcon, TagIcon } from "../components/Icons";
 
 function Cart() {
-  const { cart, removeFromCart, increaseQty, decreaseQty, totalPrice } = useCart();
+  const {
+    cart,
+    removeFromCart,
+    increaseQty,
+    decreaseQty,
+    subtotal,
+    discountAmount,
+    totalPrice,
+    appliedCoupon,
+    applyCoupon,
+    removeCoupon,
+  } = useCart();
+
+  const [couponInput, setCouponInput] = useState("");
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+
+  const handleApplyCoupon = (e) => {
+    e.preventDefault();
+    if (applyCoupon(couponInput)) {
+      setCouponInput("");
+    }
+  };
 
   return (
     <div className="container py-4">
@@ -88,20 +109,87 @@ function Cart() {
             </div>
           </div>
 
-          {/* Order Summary Side Panel */}
+          {/* Order Summary & Coupon Panel */}
           <div className="col-lg-4">
             <div className="glass-card p-4 rounded-4 prism-edge sticky-top" style={{ top: "100px" }}>
               <h4 className="fw-bold mb-3 border-bottom border-light pb-3 text-dark">
                 Order Summary
               </h4>
 
-              <div className="d-flex justify-content-between mb-2 text-secondary">
-                <span>Subtotal ({totalItems} items)</span>
-                <span className="text-dark fw-medium">₹{totalPrice?.toLocaleString()}</span>
+              {/* Promo Coupon Box */}
+              <div className="p-3 rounded-4 bg-light border border-light mb-4">
+                <span className="fw-bold text-dark small d-flex align-items-center gap-1 mb-2">
+                  <SparklesIcon size={16} className="text-primary" /> Apply Promo Code
+                </span>
+                
+                {appliedCoupon ? (
+                  <div className="d-flex align-items-center justify-content-between bg-success bg-opacity-10 border border-success border-opacity-25 rounded-pill px-3 py-2">
+                    <div className="d-flex align-items-center gap-2">
+                      <TagIcon size={16} className="text-success" />
+                      <div>
+                        <span className="fw-bold text-success font-monospace me-1">{appliedCoupon.code}</span>
+                        <small className="text-secondary">({appliedCoupon.label})</small>
+                      </div>
+                    </div>
+                    <button className="btn btn-sm text-danger fw-bold p-0 ms-2" onClick={removeCoupon}>
+                      ✕
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleApplyCoupon} className="d-flex gap-2">
+                    <input
+                      type="text"
+                      className="form-control rounded-pill form-control-sm text-uppercase"
+                      placeholder="e.g. WELCOME10, FESTIVE20"
+                      value={couponInput}
+                      onChange={(e) => setCouponInput(e.target.value)}
+                    />
+                    <button type="submit" className="btn btn-sm btn-primary rounded-pill px-3 fw-bold">
+                      Apply
+                    </button>
+                  </form>
+                )}
+                
+                <div className="mt-2 d-flex flex-wrap gap-1">
+                  <span
+                    className="badge bg-secondary bg-opacity-25 text-dark border border-secondary border-opacity-25 cursor-pointer"
+                    style={{ fontSize: "0.7rem", cursor: "pointer" }}
+                    onClick={() => applyCoupon("WELCOME10")}
+                  >
+                    WELCOME10 (-10%)
+                  </span>
+                  <span
+                    className="badge bg-secondary bg-opacity-25 text-dark border border-secondary border-opacity-25 cursor-pointer"
+                    style={{ fontSize: "0.7rem", cursor: "pointer" }}
+                    onClick={() => applyCoupon("SHOP500")}
+                  >
+                    SHOP500 (-₹500)
+                  </span>
+                  <span
+                    className="badge bg-secondary bg-opacity-25 text-dark border border-secondary border-opacity-25 cursor-pointer"
+                    style={{ fontSize: "0.7rem", cursor: "pointer" }}
+                    onClick={() => applyCoupon("FESTIVE20")}
+                  >
+                    FESTIVE20 (-20%)
+                  </span>
+                </div>
               </div>
 
+              {/* Price Breakdown */}
               <div className="d-flex justify-content-between mb-2 text-secondary">
-                <span>Estimated Delivery</span>
+                <span>Subtotal ({totalItems} items)</span>
+                <span className="text-dark fw-medium">₹{subtotal?.toLocaleString()}</span>
+              </div>
+
+              {discountAmount > 0 && (
+                <div className="d-flex justify-content-between mb-2 text-success">
+                  <span>Promo Discount Savings</span>
+                  <span className="fw-bold">-₹{discountAmount?.toLocaleString()}</span>
+                </div>
+              )}
+
+              <div className="d-flex justify-content-between mb-2 text-secondary">
+                <span>Estimated Shipping</span>
                 <span className="text-success fw-medium">FREE</span>
               </div>
 

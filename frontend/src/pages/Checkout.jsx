@@ -8,7 +8,7 @@ import { ShieldCheckIcon, LockIcon, ArrowRightIcon, CheckIcon } from "../compone
 
 function Checkout() {
   const navigate = useNavigate();
-  const { cart, totalPrice, clearCart } = useCart();
+  const { cart, subtotal, discountAmount, totalPrice, appliedCoupon, clearCart } = useCart();
   
   const savedUser = (() => {
     try {
@@ -185,6 +185,18 @@ function Checkout() {
             </div>
 
             <hr className="border-light" />
+
+            <div className="d-flex justify-content-between align-items-baseline mb-2 text-secondary">
+              <span>Subtotal</span>
+              <span className="text-dark fw-medium">₹{subtotal?.toLocaleString()}</span>
+            </div>
+
+            {discountAmount > 0 && (
+              <div className="d-flex justify-content-between align-items-baseline mb-2 text-success">
+                <span>Coupon Discount ({appliedCoupon?.code})</span>
+                <span className="fw-bold">-₹{discountAmount?.toLocaleString()}</span>
+              </div>
+            )}
 
             <div className="d-flex justify-content-between align-items-baseline mb-2">
               <span className="text-secondary">Shipping Charge</span>

@@ -7,10 +7,11 @@ import { SearchIcon, FilterIcon } from "../components/Icons";
 function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
+  const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("default");
+  const [maxPrice, setMaxPrice] = useState(200000);
+  const [inStockOnly, setInStockOnly] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -28,25 +29,30 @@ function Products() {
 
   const categoriesList = ["All", "Mobile", "Electronics", "Shoes"];
 
-  let filteredProducts = products.filter((product) => {
-    const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase()) ||
-                          product.category.toLowerCase().includes(search.toLowerCase());
-    const matchesCategory = category === "All" || product.category?.toLowerCase() === category.toLowerCase();
-    return matchesSearch && matchesCategory;
+  // Filter products by category, search term, max price, & stock availability
+  const filteredProducts = products.filter((p) => {
+    const matchesCategory = category === "All" || p.category?.toLowerCase() === category.toLowerCase();
+    const matchesSearch =
+      p.name?.toLowerCase().includes(search.toLowerCase()) ||
+      p.category?.toLowerCase().includes(search.toLowerCase());
+    const matchesPrice = (p.price || 0) <= maxPrice;
+    const matchesStock = !inStockOnly || p.countInStock > 0;
+
+    return matchesCategory && matchesSearch && matchesPrice && matchesStock;
   });
 
-  if (sortBy === "price-low") {
-    filteredProducts.sort((a, b) => a.price - b.price);
-  } else if (sortBy === "price-high") {
-    filteredProducts.sort((a, b) => b.price - a.price);
-  } else if (sortBy === "rating") {
-    filteredProducts.sort((a, b) => (b.rating || 0) - (a.rating || 0));
-  }
+  // Sort products
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    if (sortBy === "price-low") return a.price - b.price;
+    if (sortBy === "price-high") return b.price - a.price;
+    if (sortBy === "rating") return (b.rating || 0) - (a.rating || 0);
+    return 0;
+  });
 
   return (
     <div className="container py-4">
-      {/* Header Banner */}
-      <div className="glass-card p-5 text-center mb-4 prism-edge rounded-5">
+      {/* Page Header */}
+      <div className="text-center mb-4">
         <span className="eyebrow">PREMIUM CATALOG</span>
         <h1 className="display-4 fw-bold mb-2">Explore All Products</h1>
         <p className="lead text-secondary max-w-lg mx-auto">
@@ -55,12 +61,12 @@ function Products() {
       </div>
 
       {/* Filter Toolbar */}
-      <div className="glass-card p-3 mb-4 rounded-4 prism-edge">
-        <div className="row g-3 align-items-center">
+      <div className="glass-card p-4 mb-4 rounded-4 prism-edge">
+        <div className="row g-3 align-items-center mb-3">
           {/* Category Chips */}
           <div className="col-lg-6 col-md-12 d-flex flex-wrap gap-2 align-items-center">
             <span className="text-secondary small fw-bold d-flex align-items-center gap-1 me-1">
-              <FilterIcon size={16} /> Filter:
+              <FilterIcon size={16} /> Category:
             </span>
             {categoriesList.map((cat) => (
               <button
@@ -115,41 +121,78 @@ function Products() {
             </select>
           </div>
         </div>
+
+        {/* Secondary Filter Row: Price Slider & In Stock Checkbox */}
+        <div className="row g-3 align-items-center pt-3 border-top border-light">
+          <div className="col-md-6 d-flex align-items-center gap-3">
+            <label className="form-label mb-0 small text-secondary fw-bold text-nowrap">
+              Max Price: <span className="text-success fw-bold">₹{maxPrice.toLocaleString()}</span>
+            </label>
+            <input
+              type="range"
+              className="form-range"
+              min="500"
+              max="200000"
+              step="500"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(Number(e.target.value))}
+            />
+          </div>
+
+          <div className="col-md-6 d-flex justify-content-md-end align-items-center gap-3">
+            <div className="form-check form-switch mb-0">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="inStockCheck"
+                checked={inStockOnly}
+                onChange={(e) => setInStockOnly(e.target.checked)}
+              />
+              <label className="form-check-input-label small fw-bold text-dark" htmlFor="inStockCheck">
+                In Stock Items Only
+              </label>
+            </div>
+
+            {(category !== "All" || search || maxPrice < 200000 || inStockOnly) && (
+              <button
+                className="btn btn-sm btn-link text-danger text-decoration-none p-0 fw-bold"
+                onClick={() => {
+                  setCategory("All");
+                  setSearch("");
+                  setMaxPrice(200000);
+                  setInStockOnly(false);
+                  setSortBy("default");
+                }}
+              >
+                Reset Filters ↺
+              </button>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Results Header */}
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <p className="text-secondary mb-0 small">
-          Showing <span className="text-white fw-bold">{filteredProducts.length}</span> products
+      <div className="d-flex align-items-center justify-content-between mb-4">
+        <p className="text-secondary mb-0">
+          Showing <span className="fw-bold text-dark">{sortedProducts.length}</span> of {products.length} products
         </p>
       </div>
 
-      {/* Products Grid */}
+      {/* Product Grid */}
       {loading ? (
         <div className="text-center py-5">
           <div className="spinner-border text-primary" role="status" style={{ width: "3rem", height: "3rem" }}></div>
+          <p className="mt-3 text-secondary">Loading catalog products...</p>
         </div>
-      ) : filteredProducts.length === 0 ? (
-        <div className="glass-card text-center py-5 my-4 rounded-4 prism-edge">
-          <div className="icon-tile mx-auto mb-3" style={{ width: "64px", height: "64px" }}>
-            🔍
-          </div>
-          <h4 className="fw-bold">No Products Found</h4>
-          <p className="text-secondary mb-3">Try checking your spelling or clearing search filters.</p>
-          <button
-            className="btn btn-outline-light rounded-pill px-4"
-            onClick={() => {
-              setSearch("");
-              setCategory("All");
-            }}
-          >
-            Reset Filters
-          </button>
+      ) : sortedProducts.length === 0 ? (
+        <div className="alert alert-info text-center rounded-4 py-5">
+          <h4 className="fw-bold mb-2">No Matching Products Found</h4>
+          <p className="mb-0 text-secondary">Try adjusting your search filters or resetting price range.</p>
         </div>
       ) : (
         <div className="row g-4">
-          {filteredProducts.map((product) => (
-            <div key={product._id} className="col-lg-3 col-md-4 col-sm-6">
+          {sortedProducts.map((product) => (
+            <div className="col-lg-3 col-md-6" key={product._id}>
               <ProductCard product={product} />
             </div>
           ))}
