@@ -43,7 +43,7 @@ function AddProduct() {
 
   return (
     <div className="container py-4">
-      <div className="glass-card p-4 p-md-5 rounded-5 prism-edge max-w-lg mx-auto shadow-lg">
+      <div className="glass-card p-4 p-md-5 rounded-5 prism-edge max-w-lg mx-auto shadow-lg" style={{ maxWidth: "560px" }}>
         <div className="text-center mb-4">
           <span className="eyebrow">ADMIN MANAGEMENT</span>
           <h2 className="fw-bold text-dark mb-1">Add New Product</h2>

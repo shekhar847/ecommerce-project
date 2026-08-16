@@ -56,7 +56,7 @@ function EditProduct() {
 
   return (
     <div className="container py-4">
-      <div className="glass-card p-4 p-md-5 rounded-5 prism-edge max-w-lg mx-auto shadow-lg">
+      <div className="glass-card p-4 p-md-5 rounded-5 prism-edge max-w-lg mx-auto shadow-lg" style={{ maxWidth: "560px" }}>
         <div className="text-center mb-4">
           <span className="eyebrow">INVENTORY MANAGER</span>
           <h2 className="fw-bold text-dark mb-1">Edit Product</h2>

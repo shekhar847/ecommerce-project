@@ -39,7 +39,7 @@ function Login() {
 
   return (
     <div className="container py-5 d-flex align-items-center justify-content-center" style={{ minHeight: "75vh" }}>
-      <div className="glass-card p-4 p-md-5 rounded-5 prism-edge max-w-md w-100 shadow-lg">
+      <div className="glass-card p-4 p-md-5 rounded-5 prism-edge auth-card shadow-lg" style={{ maxWidth: "440px" }}>
         <div className="text-center mb-4">
           <div className="rounded-circle mx-auto d-flex align-items-center justify-content-center mb-3" style={{ width: "54px", height: "54px", background: "var(--prism-gradient)" }}>
             <SparklesIcon size={28} className="text-dark" />
