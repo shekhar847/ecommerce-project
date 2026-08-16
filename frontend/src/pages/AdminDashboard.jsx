@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../config";
 import axios from "axios";
-
-import {BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,} from "recharts";
+import { Link } from "react-router-dom";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
+import { ShoppingBagIcon, SparklesIcon, PlusIcon } from "../components/Icons";
 
 function AdminDashboard() {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -15,137 +18,193 @@ function AdminDashboard() {
         setProducts(productsData);
         setOrders(ordersData);
       } catch (error) {
-        console.log(error);
+        console.log("Error loading admin dashboard:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
 
-  const totalRevenue = orders.reduce((acc, order) => acc + order.totalPrice, 0);
+  const totalRevenue = orders.reduce((acc, order) => acc + (order.totalPrice || 0), 0);
   const pendingOrders = orders.filter((order) => order.status === "Pending").length;
   const shippedOrders = orders.filter((order) => order.status === "Shipped").length;
   const deliveredOrders = orders.filter((order) => order.status === "Delivered").length;
+
   const chartData = [
-    {
-      name: "Products",
-      value: products.length,
-    },
-    {
-      name: "Orders",
-      value: orders.length,
-    },
-    {
-      name: "Revenue",
-      value: totalRevenue,
-    },
+    { name: "Products", value: products.length },
+    { name: "Orders", value: orders.length },
+    { name: "Delivered", value: deliveredOrders },
   ];
 
   return (
-    <div className="container mt-4">
-      <h2 className="mb-4">
-        Admin Dashboard
-      </h2>
-      {/* --------------------Top Cards--------------------- */}
-      <div className="row">
-        <div className="col-md-4">
-          <div className="card p-3 text-center shadow">
-            <h4>📦 Products</h4>
-            <h2>{products.length}</h2>
-          </div>
+    <div className="container py-4">
+      <div className="d-flex align-items-center justify-content-between mb-4">
+        <div>
+          <span className="eyebrow">CONTROL CENTER</span>
+          <h1 className="display-6 fw-bold mb-0">Admin Analytics Dashboard</h1>
         </div>
-        <div className="col-md-4">
-          <div className="card p-3 text-center shadow">
-            <h4>🛒 Orders</h4>
-            <h2>{orders.length}</h2>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card p-3 text-center shadow">
-            <h4>💰 Revenue</h4>
-            <h2>₹ {totalRevenue}</h2>
-          </div>
-        </div>
+        <Link to="/add-product" className="btn btn-primary rounded-pill d-flex align-items-center gap-1 shadow">
+          <PlusIcon size={18} /> Add New Product
+        </Link>
       </div>
-      {/* --------------------Analytics chart---------------- */}
-      <h3 className="mt-5 mb-3">
-        📊 Analytics Dashboard
-      </h3>
-      <div className="card p-3 shadow mb-4" style={{ height: "400px" }}>
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chartData}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="value" fill="#0d6efd"/>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      {/* --------------------Status Cards--------------------- */}
-      <div className="row mt-4">
-        <div className="col-md-4">
-          <div className="card p-3 text-center bg-warning">
-            <h5>Pending Orders</h5>
-            <h3>{pendingOrders}</h3>
-          </div>
+
+      {loading ? (
+        <div className="text-center py-5">
+          <div className="spinner-border text-primary" role="status" style={{ width: "3rem", height: "3rem" }}></div>
         </div>
-        <div className="col-md-4">
-          <div className="card p-3 text-center bg-primary text-white">
-            <h5>Shipped Orders</h5>
-            <h3>{shippedOrders}</h3>
+      ) : (
+        <>
+          {/* KPI Top Cards */}
+          <div className="row g-4 mb-4">
+            <div className="col-md-4">
+              <div className="glass-card p-4 rounded-4 prism-edge text-center">
+                <span className="text-secondary small d-block font-monospace mb-1">TOTAL CATALOG</span>
+                <h2 className="display-6 fw-bold text-cyan mb-0">{products.length} Products</h2>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="glass-card p-4 rounded-4 prism-edge text-center">
+                <span className="text-secondary small d-block font-monospace mb-1">TOTAL ORDERS</span>
+                <h2 className="display-6 fw-bold text-violet mb-0">{orders.length} Orders</h2>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="glass-card p-4 rounded-4 prism-edge text-center">
+                <span className="text-secondary small d-block font-monospace mb-1">TOTAL REVENUE</span>
+                <h2 className="display-6 fw-bold text-lime mb-0">₹{totalRevenue?.toLocaleString()}</h2>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card p-3 text-center bg-success text-white">
-            <h5>Delivered Orders</h5>
-            <h3>{deliveredOrders}</h3>
+
+          {/* Analytics Chart */}
+          <div className="glass-card p-4 rounded-4 prism-edge mb-4">
+            <h4 className="fw-bold mb-4">Overview Chart</h4>
+            <div style={{ height: "320px" }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.08)" />
+                  <XAxis dataKey="name" stroke="#8e8aa8" />
+                  <YAxis stroke="#8e8aa8" />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#14121f",
+                      borderColor: "rgba(255,255,255,0.16)",
+                      borderRadius: "12px",
+                      color: "#f5f3ff"
+                    }}
+                  />
+                  <Bar dataKey="value" fill="#b26bff" radius={[8, 8, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
-        </div>
-      </div>
-      <hr className="my-4" />
-      {/* --------------------Orders Table--------------------- */}
-      <h3>Recent Orders</h3>
-      <table className="table table-bordered">
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Total</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map((order) => (
-            <tr key={order._id}>
-              <td>{order.user}</td>
-              <td>₹ {order.totalPrice}</td>
-              <td>{order.status}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {/* --------------------Products Table--------------------- */}
-      <h3 className="mt-4">
-        Products
-      </h3>
-      <table className="table table-bordered">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Stock</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((product) => (
-            <tr key={product._id}>
-              <td>{product.name}</td>
-              <td>{product.category}</td>
-              <td>₹ {product.price}</td>
-              <td>{product.countInStock}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+
+          {/* Status Breakdown Cards */}
+          <div className="row g-3 mb-4">
+            <div className="col-md-4">
+              <div className="glass-card p-3 rounded-4 border-warning text-center">
+                <span className="text-warning small font-monospace">PENDING</span>
+                <h3 className="fw-bold mb-0 mt-1">{pendingOrders}</h3>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="glass-card p-3 rounded-4 border-primary text-center">
+                <span className="text-cyan small font-monospace">SHIPPED</span>
+                <h3 className="fw-bold mb-0 mt-1">{shippedOrders}</h3>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="glass-card p-3 rounded-4 border-success text-center">
+                <span className="text-success small font-monospace">DELIVERED</span>
+                <h3 className="fw-bold mb-0 mt-1">{deliveredOrders}</h3>
+              </div>
+            </div>
+          </div>
+
+          {/* Recent Orders Table */}
+          <div className="glass-card p-4 rounded-4 prism-edge mb-4">
+            <h4 className="fw-bold mb-3">Recent Orders</h4>
+            <div className="table-responsive">
+              <table className="table table-dark table-hover align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orders.map((order) => (
+                    <tr key={order._id}>
+                      <td className="fw-bold text-white">{order.user}</td>
+                      <td className="text-success font-monospace">₹{order.totalPrice?.toLocaleString()}</td>
+                      <td>
+                        <span className={`badge ${
+                          order.status === "Delivered" ? "bg-success" :
+                          order.status === "Shipped" ? "bg-primary" : "bg-warning text-dark"
+                        }`}>
+                          {order.status}
+                        </span>
+                      </td>
+                      <td>
+                        <Link to="/orders" className="btn btn-sm btn-outline-light rounded-pill">
+                          Manage Status
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Products List Table */}
+          <div className="glass-card p-4 rounded-4 prism-edge">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h4 className="fw-bold mb-0">Products Inventory</h4>
+              <Link to="/add-product" className="btn btn-sm btn-primary rounded-pill">
+                Add Product
+              </Link>
+            </div>
+            <div className="table-responsive">
+              <table className="table table-dark table-hover align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products.map((product) => (
+                    <tr key={product._id}>
+                      <td className="fw-bold text-white">{product.name}</td>
+                      <td><span className="badge bg-primary">{product.category}</span></td>
+                      <td className="text-success font-monospace">₹{product.price?.toLocaleString()}</td>
+                      <td>
+                        {product.countInStock > 0 ? (
+                          <span className="badge bg-success">{product.countInStock} Available</span>
+                        ) : (
+                          <span className="badge bg-danger">Out of Stock</span>
+                        )}
+                      </td>
+                      <td>
+                        <Link to={`/edit-product/${product._id}`} className="btn btn-sm btn-outline-light rounded-pill">
+                          Edit
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
