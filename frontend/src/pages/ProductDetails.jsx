@@ -221,7 +221,7 @@ function ProductDetails() {
                 <ShieldCheckIcon size={16} className="text-violet" /> 100% Original Brand Guarantee
               </div>
               <div className="col-md-6 d-flex align-items-center gap-2 text-secondary small">
-                <SparklesIcon size={16} className="text-lime" /> 7-Day Replacement Policy
+                <SparklesIcon size={16} className="text-emerald" /> 7-Day Replacement Policy
               </div>
             </div>
           </div>

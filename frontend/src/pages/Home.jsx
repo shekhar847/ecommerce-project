@@ -129,7 +129,7 @@ function Home() {
 
           <div className="col-md-3 col-sm-6">
             <div className="glass-card p-4 h-100 prism-edge d-flex flex-column align-items-center justify-content-center">
-              <div className="icon-tile text-lime mb-3">
+              <div className="icon-tile text-emerald mb-3">
                 <SparklesIcon size={28} />
               </div>
               <h5 className="fw-bold mb-1">100% Authentic</h5>

@@ -84,7 +84,7 @@ function Checkout() {
             <span className="fw-bold">Shipping Info</span>
           </div>
           <div className="border-bottom border-secondary flex-grow-1 max-w-xs"></div>
-          <div className="d-flex align-items-center gap-2 text-lime">
+          <div className="d-flex align-items-center gap-2 text-emerald">
             <span className="badge rounded-circle bg-warning text-dark p-2">3</span>
             <span className="fw-bold">Payment</span>
           </div>

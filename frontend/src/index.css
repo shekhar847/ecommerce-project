@@ -14,7 +14,7 @@
 
   --neon-cyan: #38bdf8;
   --neon-violet: #818cf8;
-  --neon-lime: #34d399;
+  --neon-lime: #10b981;
   --neon-pink: #f43f5e;
 
   --text-hi: #f8fafc;
@@ -380,9 +380,10 @@ h2 {
 .reviews-text { color: var(--text-lo); font-weight: 500; }
 
 .card-body h4.text-success,
-.text-success {
+.text-success,
+.text-emerald {
   font-family: var(--font-mono) !important;
-  color: var(--neon-lime) !important;
+  color: #10b981 !important;
 }
 
 .badge { border-radius: var(--radius-pill); font-weight: 600; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.02em; padding: 5px 10px; }

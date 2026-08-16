@@ -58,7 +58,7 @@ function Footer() {
                 <ShieldCheckIcon size={16} className="text-violet" /> 100% Genuine
               </div>
               <div className="d-flex align-items-center gap-1.5">
-                <SupportIcon size={16} className="text-lime" /> 24/7 VIP Help
+                <SupportIcon size={16} className="text-emerald" /> 24/7 VIP Help
               </div>
             </div>
           </div>

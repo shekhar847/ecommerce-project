@@ -72,7 +72,7 @@ function AdminDashboard() {
             <div className="col-md-4">
               <div className="glass-card p-4 rounded-4 prism-edge text-center">
                 <span className="text-secondary small d-block font-monospace mb-1">TOTAL REVENUE</span>
-                <h2 className="display-6 fw-bold text-lime mb-0">₹{totalRevenue?.toLocaleString()}</h2>
+                <h2 className="display-6 fw-bold text-emerald mb-0">₹{totalRevenue?.toLocaleString()}</h2>
               </div>
             </div>
           </div>
