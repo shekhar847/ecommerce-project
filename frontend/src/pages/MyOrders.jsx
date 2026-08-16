@@ -92,7 +92,7 @@ function MyOrders() {
                   <small className="text-secondary d-block font-monospace">
                     ORDER ID: #{order._id?.slice(-8).toUpperCase()}
                   </small>
-                  <h5 className="fw-bold text-white mb-0 mt-1">Customer: {order.user}</h5>
+                  <h5 className="fw-bold text-dark mb-0 mt-1">Customer: {order.user}</h5>
                 </div>
 
                 <div className="d-flex align-items-center gap-3">
@@ -109,10 +109,10 @@ function MyOrders() {
               {/* Items List */}
               <div className="row g-3 align-items-center">
                 <div className="col-md-8">
-                  <h6 className="fw-bold text-white mb-2">Ordered Items:</h6>
+                  <h6 className="fw-bold text-dark mb-2">Ordered Items:</h6>
                   <div className="d-flex flex-column gap-2">
                     {order.items?.map((item, idx) => (
-                      <div key={idx} className="d-flex align-items-center gap-3 p-2 rounded-3 bg-dark bg-opacity-40">
+                      <div key={idx} className="d-flex align-items-center gap-3 p-2 rounded-3 bg-light border border-light">
                         {item.image && (
                           <img
                             src={item.image}
@@ -121,7 +121,7 @@ function MyOrders() {
                             style={{ width: "40px", height: "40px", objectFit: "cover" }}
                           />
                         )}
-                        <span className="fw-medium text-white flex-grow-1">{item.name}</span>
+                        <span className="fw-medium text-dark flex-grow-1">{item.name}</span>
                         <span className="badge bg-secondary">Qty: {item.qty}</span>
                         <span className="text-success font-monospace">
                           ₹{(item.price * item.qty).toLocaleString()}
@@ -132,8 +132,8 @@ function MyOrders() {
                 </div>
 
                 <div className="col-md-4">
-                  <div className="p-3 rounded-4 bg-dark bg-opacity-30 border border-secondary border-opacity-25">
-                    <h6 className="fw-bold text-white mb-2 d-flex align-items-center gap-2">
+                  <div className="p-3 rounded-4 bg-light border border-light">
+                    <h6 className="fw-bold text-dark mb-2 d-flex align-items-center gap-2">
                       <TruckIcon size={16} className="text-cyan" /> Shipping Address
                     </h6>
                     <p className="small text-secondary mb-1">{order.address}</p>

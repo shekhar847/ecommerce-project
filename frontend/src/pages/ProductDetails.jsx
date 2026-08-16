@@ -233,8 +233,8 @@ function ProductDetails() {
         <h3 className="fw-bold mb-4">Customer Reviews ({product.reviews?.length || 0})</h3>
 
         {/* Add Review Form */}
-        <div className="p-4 rounded-4 bg-dark bg-opacity-50 border border-secondary border-opacity-25 mb-4">
-          <h5 className="fw-bold mb-3 text-white">Write a Customer Review</h5>
+        <div className="p-4 rounded-4 bg-light border border-light mb-4">
+          <h5 className="fw-bold mb-3 text-dark">Write a Customer Review</h5>
           <div className="row g-3">
             <div className="col-md-4">
               <label className="form-label">Rating</label>
@@ -271,9 +271,9 @@ function ProductDetails() {
           <div className="row g-3">
             {product.reviews.map((rev, idx) => (
               <div key={idx} className="col-md-6">
-                <div className="p-3 rounded-4 bg-dark bg-opacity-30 border border-secondary border-opacity-25">
+                <div className="p-3 rounded-4 bg-light border border-light">
                   <div className="d-flex align-items-center justify-content-between mb-2">
-                    <span className="fw-bold text-white">{rev.user}</span>
+                    <span className="fw-bold text-dark">{rev.user}</span>
                     <div className="d-flex text-warning">
                       {[...Array(rev.rating || 5)].map((_, i) => (
                         <StarIcon key={i} size={14} fill="currentColor" />

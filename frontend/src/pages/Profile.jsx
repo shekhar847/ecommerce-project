@@ -43,16 +43,16 @@ function Profile() {
           >
             <UserIcon size={40} className="text-dark" />
           </div>
-          <h2 className="fw-bold text-white mb-1">{user.name}</h2>
+          <h2 className="fw-bold text-dark mb-1">{user.name}</h2>
           <span className="badge bg-primary px-3 py-1 fs-6">
             {user.role === "admin" || user.isAdmin ? "VIP Administrator" : "Registered Customer"}
           </span>
         </div>
 
-        <div className="p-4 rounded-4 bg-dark bg-opacity-40 border border-secondary border-opacity-25 mb-4">
+        <div className="p-4 rounded-4 bg-light border border-light mb-4">
           <div className="mb-3">
             <span className="text-secondary small d-block">Full Name</span>
-            <span className="fw-bold text-white fs-5">{user.name}</span>
+            <span className="fw-bold text-dark fs-5">{user.name}</span>
           </div>
 
           <div>

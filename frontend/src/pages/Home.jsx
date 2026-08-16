@@ -186,7 +186,7 @@ function Home() {
                 <div className="icon-tile mb-3" style={{ width: "72px", height: "72px" }}>
                   <SmartphoneIcon size={34} />
                 </div>
-                <h4 className="fw-bold text-white mb-1">Mobiles</h4>
+                <h4 className="fw-bold text-dark mb-1">Mobiles</h4>
                 <p className="small text-secondary mb-0">Smartphones &amp; Wearables</p>
               </div>
             </Link>
@@ -198,7 +198,7 @@ function Home() {
                 <div className="icon-tile mb-3" style={{ width: "72px", height: "72px" }}>
                   <LaptopIcon size={34} />
                 </div>
-                <h4 className="fw-bold text-white mb-1">Electronics</h4>
+                <h4 className="fw-bold text-dark mb-1">Electronics</h4>
                 <p className="small text-secondary mb-0">Laptops, Audio &amp; Gadgets</p>
               </div>
             </Link>
@@ -210,7 +210,7 @@ function Home() {
                 <div className="icon-tile mb-3" style={{ width: "72px", height: "72px" }}>
                   <FootwearIcon size={34} />
                 </div>
-                <h4 className="fw-bold text-white mb-1">Shoes</h4>
+                <h4 className="fw-bold text-dark mb-1">Shoes</h4>
                 <p className="small text-secondary mb-0">Sneakers &amp; Sports Gear</p>
               </div>
             </Link>

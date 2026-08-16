@@ -46,7 +46,7 @@ function AddProduct() {
       <div className="glass-card p-4 p-md-5 rounded-5 prism-edge max-w-lg mx-auto shadow-lg">
         <div className="text-center mb-4">
           <span className="eyebrow">ADMIN MANAGEMENT</span>
-          <h2 className="fw-bold text-white mb-1">Add New Product</h2>
+          <h2 className="fw-bold text-dark mb-1">Add New Product</h2>
           <p className="text-secondary small">Add a new item to your store inventory</p>
         </div>
 

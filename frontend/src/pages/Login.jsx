@@ -44,7 +44,7 @@ function Login() {
           <div className="rounded-circle mx-auto d-flex align-items-center justify-content-center mb-3" style={{ width: "54px", height: "54px", background: "var(--prism-gradient)" }}>
             <SparklesIcon size={28} className="text-dark" />
           </div>
-          <h2 className="fw-bold text-white mb-1">Welcome Back</h2>
+          <h2 className="fw-bold text-dark mb-1">Welcome Back</h2>
           <p className="text-secondary small">Log in to manage your orders &amp; wishlist</p>
         </div>
 

@@ -88,13 +88,14 @@ function AdminDashboard() {
                   <YAxis stroke="#8e8aa8" />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: "#14121f",
-                      borderColor: "rgba(255,255,255,0.16)",
+                      backgroundColor: "#ffffff",
+                      borderColor: "#e2e8f0",
                       borderRadius: "12px",
-                      color: "#f5f3ff"
+                      color: "#0f172a",
+                      boxShadow: "0 4px 20px rgba(0,0,0,0.08)"
                     }}
                   />
-                  <Bar dataKey="value" fill="#b26bff" radius={[8, 8, 0, 0]} />
+                  <Bar dataKey="value" fill="#2563eb" radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -124,9 +125,9 @@ function AdminDashboard() {
 
           {/* Recent Orders Table */}
           <div className="glass-card p-4 rounded-4 prism-edge mb-4">
-            <h4 className="fw-bold mb-3">Recent Orders</h4>
+            <h4 className="fw-bold mb-3 text-dark">Recent Orders</h4>
             <div className="table-responsive">
-              <table className="table table-dark table-hover align-middle mb-0">
+              <table className="table table-hover align-middle mb-0">
                 <thead>
                   <tr>
                     <th>User</th>
@@ -138,7 +139,7 @@ function AdminDashboard() {
                 <tbody>
                   {orders.map((order) => (
                     <tr key={order._id}>
-                      <td className="fw-bold text-white">{order.user}</td>
+                      <td className="fw-bold text-dark">{order.user}</td>
                       <td className="text-success font-monospace">₹{order.totalPrice?.toLocaleString()}</td>
                       <td>
                         <span className={`badge ${
@@ -163,13 +164,13 @@ function AdminDashboard() {
           {/* Products List Table */}
           <div className="glass-card p-4 rounded-4 prism-edge">
             <div className="d-flex justify-content-between align-items-center mb-3">
-              <h4 className="fw-bold mb-0">Products Inventory</h4>
+              <h4 className="fw-bold mb-0 text-dark">Products Inventory</h4>
               <Link to="/add-product" className="btn btn-sm btn-primary rounded-pill">
                 Add Product
               </Link>
             </div>
             <div className="table-responsive">
-              <table className="table table-dark table-hover align-middle mb-0">
+              <table className="table table-hover align-middle mb-0">
                 <thead>
                   <tr>
                     <th>Product Name</th>
@@ -182,7 +183,7 @@ function AdminDashboard() {
                 <tbody>
                   {products.map((product) => (
                     <tr key={product._id}>
-                      <td className="fw-bold text-white">{product.name}</td>
+                      <td className="fw-bold text-dark">{product.name}</td>
                       <td><span className="badge bg-primary">{product.category}</span></td>
                       <td className="text-success font-monospace">₹{product.price?.toLocaleString()}</td>
                       <td>

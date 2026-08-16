@@ -28,29 +28,28 @@ function Navbar() {
     <header className="sticky-top py-3" style={{ zIndex: 1050 }}>
       <div className="container">
         <nav className="navbar navbar-expand-lg px-3 py-2" style={{
-          background: "rgba(20, 18, 31, 0.75)",
+          background: "rgba(255, 255, 255, 0.92)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
-          border: "1px solid var(--edge)",
+          border: "1px solid #e2e8f0",
           borderRadius: "var(--radius-pill)",
-          boxShadow: "0 12px 32px rgba(0, 0, 0, 0.35)"
+          boxShadow: "0 10px 30px rgba(15, 23, 42, 0.06)"
         }}>
           {/* Brand Logo */}
           <Link className="navbar-brand d-flex align-items-center gap-2 fw-bold me-4" to="/">
             <div className="rounded-circle d-flex align-items-center justify-content-center" style={{
               width: "36px",
               height: "36px",
-              background: "var(--prism-gradient)"
+              background: "#0f172a"
             }}>
-              <SparklesIcon size={20} className="text-dark" />
+              <SparklesIcon size={20} className="text-white" />
             </div>
             <span style={{
               fontFamily: "var(--font-display)",
               fontSize: "1.35rem",
+              fontWeight: "800",
               letterSpacing: "-0.02em",
-              background: "var(--prism-gradient)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent"
+              color: "#0f172a"
             }}>
               ShopSphere
             </span>
@@ -58,7 +57,7 @@ function Navbar() {
 
           {/* Toggle for mobile */}
           <button
-            className="navbar-toggler border-0 shadow-none text-light"
+            className="navbar-toggler border-0 shadow-none text-dark"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navContent"
@@ -78,7 +77,7 @@ function Navbar() {
                   to="/products"
                   className={({ isActive }) =>
                     `nav-link px-3 py-2 rounded-pill fw-medium transition-all ${
-                      isActive ? "bg-primary text-dark fw-bold" : "text-light hover-glow"
+                      isActive ? "bg-dark text-white fw-bold shadow-sm" : "text-dark"
                     }`
                   }
                 >
@@ -93,7 +92,7 @@ function Navbar() {
                       to="/add-product"
                       className={({ isActive }) =>
                         `nav-link px-3 py-2 rounded-pill d-flex align-items-center gap-1 ${
-                          isActive ? "bg-primary text-dark fw-bold" : "text-light"
+                          isActive ? "bg-dark text-white fw-bold shadow-sm" : "text-dark"
                         }`
                       }
                     >
@@ -105,7 +104,7 @@ function Navbar() {
                       to="/admin"
                       className={({ isActive }) =>
                         `nav-link px-3 py-2 rounded-pill ${
-                          isActive ? "bg-primary text-dark fw-bold" : "text-light"
+                          isActive ? "bg-dark text-white fw-bold shadow-sm" : "text-dark"
                         }`
                       }
                     >
@@ -136,7 +135,7 @@ function Navbar() {
               {/* Cart button */}
               <Link
                 to="/cart"
-                className="btn btn-primary rounded-pill d-flex align-items-center gap-2 px-3 py-2"
+                className="btn btn-accent rounded-pill d-flex align-items-center gap-2 px-3 py-2"
                 title="Shopping Cart"
               >
                 <ShoppingBagIcon size={18} />
@@ -147,7 +146,7 @@ function Navbar() {
               {user ? (
                 <div className="dropdown ms-lg-2">
                   <button
-                    className="btn btn-accent rounded-pill dropdown-toggle d-flex align-items-center gap-2 px-3 py-2"
+                    className="btn btn-primary rounded-pill dropdown-toggle d-flex align-items-center gap-2 px-3 py-2"
                     type="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -155,18 +154,18 @@ function Navbar() {
                     <UserIcon size={16} />
                     <span>{user.name}</span>
                   </button>
-                  <ul className="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow-lg rounded-4 p-2 border border-secondary mt-2">
+                  <ul className="dropdown-menu dropdown-menu-end shadow-lg rounded-4 p-2 border border-light mt-2">
                     <li>
-                      <Link className="dropdown-menu-item dropdown-item rounded-3 d-flex align-items-center gap-2 py-2" to="/profile">
+                      <Link className="dropdown-item rounded-3 d-flex align-items-center gap-2 py-2" to="/profile">
                         <UserIcon size={16} /> My Profile
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-menu-item dropdown-item rounded-3 d-flex align-items-center gap-2 py-2" to="/orders">
+                      <Link className="dropdown-item rounded-3 d-flex align-items-center gap-2 py-2" to="/orders">
                         <ShoppingBagIcon size={16} /> My Orders
                       </Link>
                     </li>
-                    <li><hr className="dropdown-divider border-secondary" /></li>
+                    <li><hr className="dropdown-divider border-light" /></li>
                     <li>
                       <button
                         className="dropdown-item rounded-3 text-danger d-flex align-items-center gap-2 py-2"
@@ -182,7 +181,7 @@ function Navbar() {
                   <NavLink to="/login" className="btn btn-outline-light rounded-pill px-3 py-2">
                     Login
                   </NavLink>
-                  <NavLink to="/register" className="btn btn-accent rounded-pill px-3 py-2">
+                  <NavLink to="/register" className="btn btn-primary rounded-pill px-3 py-2">
                     Register
                   </NavLink>
                 </div>

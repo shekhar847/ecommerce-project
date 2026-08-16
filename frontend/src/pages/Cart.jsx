@@ -11,7 +11,7 @@ function Cart() {
       <div className="d-flex align-items-center justify-content-between mb-4">
         <div>
           <span className="eyebrow">CHECKOUT BAG</span>
-          <h1 className="display-6 fw-bold mb-0">Shopping Cart</h1>
+          <h1 className="display-6 fw-bold mb-0 text-dark">Shopping Cart</h1>
         </div>
         <span className="badge bg-primary fs-6 px-3 py-2">
           {totalItems} {totalItems === 1 ? "Item" : "Items"}
@@ -23,7 +23,7 @@ function Cart() {
           <div className="icon-tile mx-auto mb-3" style={{ width: "72px", height: "72px" }}>
             <ShoppingBagIcon size={36} className="text-secondary" />
           </div>
-          <h3 className="fw-bold mb-2">Your Cart is Empty</h3>
+          <h3 className="fw-bold mb-2 text-dark">Your Cart is Empty</h3>
           <p className="text-secondary mb-4">Looks like you haven't added any items to your bag yet.</p>
           <Link to="/products" className="btn btn-primary btn-lg rounded-pill px-5">
             Explore Products <ArrowRightIcon size={18} className="ms-1" />
@@ -48,21 +48,21 @@ function Cart() {
 
                     <div className="col-md-5 col-8">
                       <span className="badge bg-primary mb-1">{item.category || "General"}</span>
-                      <h5 className="fw-bold text-white mb-1 text-truncate">{item.name}</h5>
+                      <h5 className="fw-bold text-dark mb-1 text-truncate">{item.name}</h5>
                       <span className="text-success fw-bold">₹{item.price?.toLocaleString()}</span>
                     </div>
 
                     <div className="col-md-3 col-6 d-flex align-items-center gap-2">
-                      <div className="d-flex align-items-center rounded-pill bg-dark border border-secondary px-2 py-1">
+                      <div className="d-flex align-items-center rounded-pill bg-light border border-light px-2 py-1">
                         <button
-                          className="btn btn-sm btn-link text-white text-decoration-none p-1"
+                          className="btn btn-sm btn-link text-dark text-decoration-none p-1"
                           onClick={() => decreaseQty(item._id)}
                         >
                           -
                         </button>
-                        <span className="fw-bold text-white px-2 small">{item.qty}</span>
+                        <span className="fw-bold text-dark px-2 small">{item.qty}</span>
                         <button
-                          className="btn btn-sm btn-link text-white text-decoration-none p-1"
+                          className="btn btn-sm btn-link text-dark text-decoration-none p-1"
                           onClick={() => increaseQty(item._id)}
                         >
                           <PlusIcon size={12} />
@@ -71,7 +71,7 @@ function Cart() {
                     </div>
 
                     <div className="col-md-2 col-6 text-end">
-                      <div className="fw-bold text-white mb-1">
+                      <div className="fw-bold text-dark mb-1">
                         ₹{(item.price * item.qty).toLocaleString()}
                       </div>
                       <button
@@ -91,13 +91,13 @@ function Cart() {
           {/* Order Summary Side Panel */}
           <div className="col-lg-4">
             <div className="glass-card p-4 rounded-4 prism-edge sticky-top" style={{ top: "100px" }}>
-              <h4 className="fw-bold mb-3 border-bottom border-secondary border-opacity-25 pb-3">
+              <h4 className="fw-bold mb-3 border-bottom border-light pb-3 text-dark">
                 Order Summary
               </h4>
 
               <div className="d-flex justify-content-between mb-2 text-secondary">
                 <span>Subtotal ({totalItems} items)</span>
-                <span className="text-white fw-medium">₹{totalPrice?.toLocaleString()}</span>
+                <span className="text-dark fw-medium">₹{totalPrice?.toLocaleString()}</span>
               </div>
 
               <div className="d-flex justify-content-between mb-2 text-secondary">
@@ -107,19 +107,19 @@ function Cart() {
 
               <div className="d-flex justify-content-between mb-3 text-secondary">
                 <span>Taxes &amp; Fees</span>
-                <span className="text-white fw-medium">Included</span>
+                <span className="text-dark fw-medium">Included</span>
               </div>
 
-              <hr className="border-secondary border-opacity-25" />
+              <hr className="border-light" />
 
               <div className="d-flex justify-content-between align-items-baseline mb-4">
-                <span className="fw-bold text-white fs-5">Total Amount</span>
+                <span className="fw-bold text-dark fs-5">Total Amount</span>
                 <span className="display-6 fw-bold text-success">
                   ₹{totalPrice?.toLocaleString()}
                 </span>
               </div>
 
-              <Link to="/checkout" className="btn btn-primary btn-lg w-100 rounded-pill shadow mb-2">
+              <Link to="/checkout" className="btn btn-accent btn-lg w-100 rounded-pill shadow mb-2">
                 Proceed To Checkout <ArrowRightIcon size={18} className="ms-1" />
               </Link>
 

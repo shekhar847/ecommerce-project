@@ -173,7 +173,7 @@ function Checkout() {
                       style={{ width: "50px", height: "50px", objectFit: "cover" }}
                     />
                     <div>
-                      <h6 className="fw-bold text-white mb-0 text-truncate max-w-xs">{item.name}</h6>
+                      <h6 className="fw-bold text-dark mb-0 text-truncate max-w-xs">{item.name}</h6>
                       <small className="text-secondary">Qty: {item.qty}</small>
                     </div>
                   </div>
@@ -184,7 +184,7 @@ function Checkout() {
               ))}
             </div>
 
-            <hr className="border-secondary border-opacity-25" />
+            <hr className="border-light" />
 
             <div className="d-flex justify-content-between align-items-baseline mb-2">
               <span className="text-secondary">Shipping Charge</span>
@@ -192,11 +192,11 @@ function Checkout() {
             </div>
 
             <div className="d-flex justify-content-between align-items-baseline mb-3">
-              <span className="fw-bold text-white fs-5">Total Payable</span>
+              <span className="fw-bold text-dark fs-5">Total Payable</span>
               <span className="display-6 fw-bold text-success">₹{totalPrice?.toLocaleString()}</span>
             </div>
 
-            <div className="p-3 rounded-3 bg-dark bg-opacity-40 border border-secondary border-opacity-25">
+            <div className="p-3 rounded-3 bg-light border border-light">
               <div className="d-flex align-items-center gap-2 text-cyan small mb-1">
                 <CheckIcon size={16} /> 100% Encrypted Payment
               </div>
