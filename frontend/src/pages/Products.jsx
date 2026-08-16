@@ -78,24 +78,24 @@ function Products() {
           </div>
 
           {/* Search Box & Sort */}
-          <div className="col-lg-6 col-md-12 d-flex gap-2">
-            <div className="position-relative flex-grow-1">
+          <div className="col-lg-6 col-md-12 d-flex gap-2 align-items-center">
+            <div className="position-relative flex-grow-1 d-flex align-items-center">
+              <SearchIcon
+                size={18}
+                className="position-absolute text-secondary ms-3"
+                style={{ left: "0", zIndex: 5, pointerEvents: "none" }}
+              />
               <input
                 type="text"
-                className="form-control rounded-pill ps-5 pe-4"
+                className="form-control rounded-pill ps-5 pe-4 w-100"
                 placeholder="Search products by name or category..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <SearchIcon
-                size={18}
-                className="position-absolute text-secondary"
-                style={{ left: "16px", top: "50%", transform: "translateY(-50%)" }}
-              />
               {search && (
                 <button
-                  className="btn btn-sm btn-link text-secondary text-decoration-none position-absolute"
-                  style={{ right: "12px", top: "50%", transform: "translateY(-50%)" }}
+                  className="btn btn-sm btn-link text-secondary text-decoration-none position-absolute me-2"
+                  style={{ right: "0", zIndex: 5 }}
                   onClick={() => setSearch("")}
                 >
                   ✕
