@@ -1,41 +1,40 @@
 /* =========================================================
    ShopSphere — Design Tokens
-   Direction: Premium dark, glassmorphism, neon accents.
-   Signature: "prism edge" — a gradient hairline that wakes
-   up on hover, used consistently on cards, panels & inputs.
+   Direction: Corporate Luxury & Modern Tech (Sapphire Indigo & Slate)
+   Signature: "prism edge" — sleek indigo-sapphire hairline glow
    ========================================================= */
 :root {
   /* -- Palette -- */
-  --void: #07060d;          /* base canvas, near-black w/ violet undertone */
-  --void-2: #0c0a17;
-  --surface: #14121f;       /* glass panel base */
-  --surface-2: #1a1729;
+  --void: #090d16;          /* Deep midnight slate canvas */
+  --void-2: #0f172a;        /* Elevated canvas container */
+  --surface: #111827;       /* Glass panel base */
+  --surface-2: #1f2937;
   --edge: rgba(255, 255, 255, 0.08);
   --edge-strong: rgba(255, 255, 255, 0.16);
 
-  --neon-cyan: #3ee8ff;
-  --neon-violet: #b26bff;
-  --neon-lime: #c6ff5e;
-  --neon-pink: #ff4fa3;
+  --neon-cyan: #38bdf8;
+  --neon-violet: #818cf8;
+  --neon-lime: #34d399;
+  --neon-pink: #f43f5e;
 
-  --text-hi: #f5f3ff;
-  --text-mid: #c7c4dd;
-  --text-lo: #8e8aa8;
+  --text-hi: #f8fafc;
+  --text-mid: #cbd5e1;
+  --text-lo: #64748b;
 
-  --danger: #ff5470;
-  --success: #4ee6a5;
-  --warning: #ffc857;
+  --danger: #ef4444;
+  --success: #10b981;
+  --warning: #f59e0b;
 
   /* -- Type -- */
   --font-display: "Space Grotesk", "Segoe UI", sans-serif;
   --font-body: "Plus Jakarta Sans", "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  --radius: 18px;
+  --radius: 16px;
   --radius-sm: 10px;
   --radius-pill: 999px;
 
-  --prism-gradient: linear-gradient(120deg, var(--neon-cyan), var(--neon-violet) 55%, var(--neon-lime));
+  --prism-gradient: linear-gradient(135deg, #4f46e5 0%, #3b82f6 50%, #38bdf8 100%);
 }
 
 /* =========================== Base =========================== */
@@ -47,8 +46,8 @@ html {
 
 body {
   background:
-    radial-gradient(60vw 40vh at 15% 0%, rgba(178, 107, 255, 0.14), transparent 60%),
-    radial-gradient(50vw 40vh at 85% 15%, rgba(62, 232, 255, 0.10), transparent 60%),
+    radial-gradient(60vw 40vh at 15% 0%, rgba(79, 70, 229, 0.12), transparent 60%),
+    radial-gradient(50vw 40vh at 85% 15%, rgba(56, 189, 248, 0.08), transparent 60%),
     var(--void);
   background-attachment: fixed;
   color: var(--text-mid);
@@ -65,7 +64,7 @@ h1, h2, h3, h4, h5, h6 {
 a { color: var(--neon-cyan); }
 a:hover { color: var(--neon-violet); }
 
-::selection { background: var(--neon-violet); color: var(--void); }
+::selection { background: var(--neon-violet); color: #ffffff; }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
@@ -110,8 +109,6 @@ h2 {
 }
 
 /* ======================= Prism-edge signature ======================= */
-/* A 1px gradient hairline that intensifies + glows on hover/focus.
-   Applied to cards, glass panels & elevated surfaces app-wide. */
 .prism-edge {
   position: relative;
   background: var(--surface);
@@ -140,7 +137,7 @@ h2 {
 }
 .prism-edge:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45), 0 0 30px rgba(178, 107, 255, 0.12);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45), 0 0 30px rgba(79, 70, 229, 0.15);
 }
 
 /* ============================ Navbar ============================ */
@@ -149,7 +146,7 @@ h2 {
   padding-top: 18px;
 }
 .navbar .container {
-  background: rgba(20, 18, 31, 0.65);
+  background: rgba(17, 24, 39, 0.75);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid var(--edge);
@@ -176,23 +173,24 @@ h2 {
 
 /* Current page indicator */
 .navbar .nav-active {
-  background: rgba(62, 232, 255, 0.12);
+  background: rgba(56, 189, 248, 0.12);
   border-color: var(--neon-cyan);
   color: var(--neon-cyan);
-  box-shadow: 0 0 16px rgba(62, 232, 255, 0.25);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
 }
 
-/* Premium accent chip (Register / Profile) — replaces stark white */
+/* Premium accent button */
 .btn-accent {
-  background: linear-gradient(120deg, var(--neon-lime), var(--neon-cyan));
+  background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
   border: none;
-  color: var(--void);
+  color: #ffffff !important;
   font-weight: 700;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
 }
 .btn-accent:hover {
-  filter: brightness(1.08);
-  color: var(--void);
-  box-shadow: 0 0 18px rgba(198, 255, 94, 0.3);
+  filter: brightness(1.1);
+  color: #ffffff !important;
+  box-shadow: 0 6px 18px rgba(56, 189, 248, 0.45);
 }
 
 /* ============================ Buttons ============================ */
@@ -200,22 +198,22 @@ h2 {
 
 .btn-primary,
 .btn-dark {
-  background: var(--prism-gradient);
+  background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
   border: none;
-  color: var(--void);
-  box-shadow: 0 8px 24px rgba(178, 107, 255, 0.25);
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.35);
 }
 .btn-primary:hover, .btn-primary:focus,
 .btn-dark:hover, .btn-dark:focus {
-  filter: brightness(1.08);
-  color: var(--void);
-  box-shadow: 0 10px 28px rgba(62, 232, 255, 0.3);
+  filter: brightness(1.12);
+  color: #ffffff !important;
+  box-shadow: 0 6px 22px rgba(79, 70, 229, 0.5);
 }
 
 .btn-outline-light {
   border: 1px solid var(--edge-strong);
   color: var(--text-hi);
-  background: transparent;
+  background: rgba(255, 255, 255, 0.03);
 }
 .btn-outline-light:hover {
   background: rgba(255, 255, 255, 0.08);
@@ -228,20 +226,21 @@ h2 {
   border: none;
   color: var(--void);
 }
-.btn-light:hover { background: var(--neon-lime); color: var(--void); }
+.btn-light:hover { background: #e2e8f0; color: var(--void); }
 
 .btn-warning {
-  background: var(--neon-lime);
+  background: var(--warning);
   border: none;
-  color: var(--void);
+  color: #ffffff !important;
 }
-.btn-warning:hover { filter: brightness(1.1); color: var(--void); }
+.btn-warning:hover { filter: brightness(1.1); color: #ffffff !important; }
 
-.btn-danger { background: var(--danger); border: none; }
-.btn-danger:hover { filter: brightness(1.1); }
+.btn-danger { background: var(--danger); border: none; color: #ffffff !important; }
+.btn-danger:hover { filter: brightness(1.1); color: #ffffff !important; }
 
-.btn-success { background: var(--success); border: none; color: var(--void); }
-.btn-success:hover { filter: brightness(1.1); color: var(--void); }
+.btn-success { background: var(--success); border: none; color: #ffffff !important; }
+.btn-success:hover { filter: brightness(1.1); color: #ffffff !important; }
+
 
 .btn-lg { border-radius: var(--radius-sm); padding: 12px 26px; }
 
